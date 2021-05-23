@@ -26,6 +26,7 @@ aside {
     background: lightblue;
     width: 150px;
     padding: 16px;
+    padding-top: 80px;
     position: fixed;
     top: 0;
     left: 0;
