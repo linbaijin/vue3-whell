@@ -7,20 +7,22 @@
         <h2>组件列表</h2>
         <ol>
           <li>
-            <router-link to="doc/switch"> switch组件 </router-link>
+            <router-link to="/doc/switch"> switch组件 </router-link>
           </li>
           <li>
-            <router-link to="doc/button"> button组件 </router-link>
+            <router-link to="/doc/button"> button组件 </router-link>
           </li>
           <li>
-            <router-link to="doc/dialog"> dialog组件 </router-link>
+            <router-link to="/doc/dialog"> dialog组件 </router-link>
           </li>
           <li>
-            <router-link to="doc/tabs"> tabs组件 </router-link>
+            <router-link to="/doc/tabs"> tabs组件 </router-link>
           </li>
         </ol>
       </aside>
-      <main>内容</main>
+      <main>
+          <router-view></router-view>
+      </main>
     </div>
   </div>
 </template>
@@ -57,4 +59,14 @@ aside {
     }
   }
 }
+
+main {
+    padding-left: 150px;
+}
+
+@media (max-width:500px) {
+    main {
+        padding-left: 0;
+    }
+  }
 </style>
