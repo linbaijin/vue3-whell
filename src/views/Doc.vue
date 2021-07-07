@@ -1,9 +1,8 @@
-
 <template>
   <div class="layout">
     <Topnav class="nav" />
     <div class="content">
-      <aside v-if="menuVisible">
+      <aside :class="{ active: menuVisible }">
         <h2>组件列表</h2>
         <ol>
           <li>
@@ -21,7 +20,7 @@
         </ol>
       </aside>
       <main>
-          <router-view></router-view>
+        <router-view></router-view>
       </main>
     </div>
   </div>
@@ -36,8 +35,8 @@ export default {
   setup() {
     const menuVisible = inject<Ref<boolean>>('xxx')
     console.log('tapnav menuVisible', menuVisible?.value)
-    return {menuVisible}
-  }
+    return { menuVisible }
+  },
 }
 </script>
 
@@ -50,20 +49,19 @@ export default {
     flex-shrink: 0;
   }
   & > .content {
-    padding-top: 60px;
+    position: relative;
+    margin-top: 60px;
     padding-left: 156px;
     flex-grow: 1;
     @media (max-width: 500px) {
-      padding-left: 0; 
+      padding-left: 0;
     }
   }
 }
 
 .content {
   display: flex;
-  > aside {
-    flex-shrink: 0;
-  }
+  position: relative;
   > main {
     flex-grow: 1;
     padding: 16px;
@@ -72,14 +70,17 @@ export default {
 }
 
 aside {
+  position: absolute;
+  z-index: 10;
+  flex-shrink: 0;
   background: lightblue;
   width: 150px;
-  position: fixed;
   padding: 16px;
   top: 0;
-  left: 0;
+  left: -100%;
   padding-top: 70px;
   height: 100%;
+  transition: all 0.3s ease-in-out;
   & > h2 {
     margin-bottom: 4px;
   }
@@ -88,6 +89,10 @@ aside {
       padding: 4px 0;
     }
   }
+}
+
+.active {
+  left: 0;
 }
 
 main {
