@@ -1,20 +1,35 @@
 <template>
   <div>
-    <button class="ls-switch" :class="{ checked: checked }" @click="toggle"><span></span></button>
+    <button
+      class="ls-switch"
+      :class="{ checked: value }"
+      :style="{ backgroundColor: value ? activeColor : inactiveColor }"
+      @click="toggle"
+    >
+      <span></span>
+    </button>
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script lang="ts">
 export default {
-  setup() {
-    const checked = ref(false)
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+    },
+    activeColor: {
+      type: String,
+    },
+    inactiveColor: {
+      type: String,
+    },
+  },
+  setup(props, context) {
     const toggle = () => {
-      console.log('toggle')
-      checked.value = !checked.value
+      context.emit('update:value', !props.value)
     }
     return {
-      checked,
       toggle,
     }
   },
@@ -39,7 +54,7 @@ $h2: $h - 4px;
     height: $h2;
     background-color: #ffffff;
     border-radius: $h2 / 2;
-    transition: left .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -47,6 +62,22 @@ $h2: $h - 4px;
   background-color: blue;
   & > span {
     left: calc(100% - #{$h2} - 2px);
+  }
+}
+
+.ls-switch:focus {
+  outline: none;
+}
+
+.ls-switch:active {
+  > span {
+    width: $h2 + 4px;
+  }
+}
+.ls-switch.checked:active {
+  > span {
+    width: $h2 + 4px;
+    margin-left: -4px;
   }
 }
 </style>
