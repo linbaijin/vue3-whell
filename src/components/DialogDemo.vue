@@ -1,15 +1,17 @@
 <template>
   <div>
-      dialog demo
+    <Dialog />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+// import { ref } from 'vue'
+import Dialog from '../lib/Dialog.vue'
 export default {
-
+  components: {
+    Dialog,
+  },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
