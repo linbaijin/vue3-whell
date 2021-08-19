@@ -2,11 +2,12 @@
   <div>
     <button
       class="ls-switch"
-      :class="{ checked: value }"
+      :class="{ 'ls-checked': value }"
       :style="{ backgroundColor: value ? activeColor : inactiveColor }"
       @click="toggle"
     >
-      <span></span>
+      <span class="ls-switch-handle"></span>
+      <span v-if="checkedString || unCheckedString" class="ls-switch-inner">{{value ? checkedString : unCheckedString}}</span>
     </button>
   </div>
 </template>
@@ -22,6 +23,12 @@ export default {
       type: String,
     },
     inactiveColor: {
+      type: String,
+    },
+    checkedString: {
+      type: String,
+    },
+    unCheckedString: {
       type: String,
     },
   },
@@ -40,13 +47,13 @@ export default {
 $h: 22px;
 $h2: $h - 4px;
 .ls-switch {
-  width: $h * 2;
+  min-width: $h * 2;
   height: $h;
   border: none;
-  background-color: gray;
+  background-color: rgba($color: #000000, $alpha: 0.5);
   border-radius: $h / 2;
   position: relative;
-  & > span {
+  & > .ls-switch-handle {
     position: absolute;
     top: 2px;
     left: 2px;
@@ -56,12 +63,22 @@ $h2: $h - 4px;
     border-radius: $h2 / 2;
     transition: all 0.3s ease-in-out;
   }
+  & > &-inner {
+    display: block;
+    font-size: 12px;
+    margin: 0 6px 0 $h + 6px;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+  }
 }
 
-.checked {
-  background-color: blue;
-  & > span {
+.ls-checked {
+  background-color: #1890ff;
+  & > .ls-switch-handle {
     left: calc(100% - #{$h2} - 2px);
+  }
+  & > .ls-switch-inner {
+    margin: 0 $h + 6px 0 6px;
   }
 }
 
@@ -70,12 +87,12 @@ $h2: $h - 4px;
 }
 
 .ls-switch:active {
-  > span {
+  > .ls-switch-handle {
     width: $h2 + 4px;
   }
 }
-.ls-switch.checked:active {
-  > span {
+.ls-switch.ls-checked:active {
+  > .ls-switch-handle {
     width: $h2 + 4px;
     margin-left: -4px;
   }
