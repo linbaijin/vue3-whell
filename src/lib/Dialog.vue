@@ -1,22 +1,24 @@
 <template>
-  <transition name="fade">
-    <div v-if="visible" class="ls-dialog-overlay" @click="onClickOverlay"></div>
-  </transition>
-  <div class="ls-dialog-wrapper" v-if="visible">
-    <div class="ls-dialog">
-      <header>
-        <slot name="title">标题</slot>
-        <span class="ls-dialog-close" @click="close"></span>
-      </header>
-      <main>
-        <slot name="content"></slot>
-      </main>
-      <footer>
-        <Button type="primary" @click="ok">OK</Button>
-        <Button @click="cancel">Cancel</Button>
-      </footer>
+  <Teleport to="body">
+    <transition name="fade">
+      <div v-if="visible" class="ls-dialog-overlay" @click="onClickOverlay"></div>
+    </transition>
+    <div class="ls-dialog-wrapper" v-if="visible">
+      <div class="ls-dialog">
+        <header>
+          <slot name="title">标题</slot>
+          <span class="ls-dialog-close" @click="close"></span>
+        </header>
+        <main>
+          <slot name="content"></slot>
+        </main>
+        <footer>
+          <Button type="primary" @click="ok">OK</Button>
+          <Button @click="cancel">Cancel</Button>
+        </footer>
+      </div>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <script lang="ts">

@@ -2,8 +2,20 @@
   <div>Dialog示例</div>
   <h1>示例一</h1>
   <Button @click="toggle" type="primary">toggle</Button>
-  <Dialog v-model:visible="x"></Dialog>
-  <Dialog v-model:visible="x" :closeOnClickOverlay="false" :ok="f1" :cancel="f2"></Dialog>
+  <Button @click="toggle2" type="primary">toggle2</Button>
+  <Dialog v-model:visible="x">
+    <template #content>
+      <div>dialog内容</div>
+    </template>
+  </Dialog>
+  <Dialog v-model:visible="y" :closeOnClickOverlay="false" :ok="f1" :cancel="f2">
+    <template #title>
+      <strong>加粗的标题</strong>
+    </template>
+    <template #content>
+      <div>dialog内容</div>
+    </template>
+  </Dialog>
 </template>
 
 <script lang="ts">
@@ -20,6 +32,10 @@ export default {
     const toggle = () => {
       x.value = !x.value
     }
+    const y = ref(false)
+    const toggle2 = () => {
+      y.value = !y.value
+    }
     const f1 = () => {
       return false
     }
@@ -27,6 +43,8 @@ export default {
     return {
       x,
       toggle,
+      y,
+      toggle2,
       f1,
       f2,
     }
@@ -34,5 +52,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
