@@ -1,33 +1,43 @@
 <template>
-  <div class="topnav">
-    <div class="logo" >LOGO</div>
+  <div class="topnav" :class="{ top: scrollTop < 10 }">
+    <div class="logo">
+      <svg class="icon">
+        <use xlink:href="#icon-UFOSVG"></use>
+      </svg>
+    </div>
     <ul class="menu">
-      <li>菜单1</li>
-      <li>菜单2</li>
+      <li>
+        <router-link to="/doc">文档</router-link>
+      </li>
     </ul>
     <span class="toggleAside" @click="toggleMenuVisible"></span>
   </div>
 </template>
 
 <script lang="ts">
-import { inject, Ref } from 'vue'
+import { inject, onMounted, ref, Ref } from 'vue'
 export default {
-  setup() {
+  setup(props, content) {
     const menuVisible = inject<Ref<boolean>>('xxx')
+    const scrollTop = ref<number>(0)
     console.log('tapnav menuVisible', menuVisible?.value)
+    onMounted(() => {
+      window.addEventListener('scroll', () => {
+        scrollTop.value = document.documentElement.scrollTop
+      })
+    })
     const toggleMenuVisible = () => {
       if (menuVisible) {
         menuVisible.value = !menuVisible.value
       }
     }
-    return { toggleMenuVisible }
+    return { toggleMenuVisible, scrollTop }
   },
 }
 </script>
 
 <style lang="scss">
 .topnav {
-  background: pink;
   display: flex;
   padding: 16px;
   position: fixed;
@@ -37,9 +47,18 @@ export default {
   z-index: 10;
   justify-content: center;
   align-items: center;
+  background: #fff;
+  transition: all 250ms ease-in-out;
+  &.top {
+    background: transparent;
+  }
   > .logo {
     max-width: 6em;
     margin-right: auto;
+    & > .icon {
+      width: 36px;
+      height: 36px;
+    }
   }
   > .menu {
     display: flex;
@@ -59,8 +78,8 @@ export default {
     top: 50%;
     transform: translateY(-50%);
   }
-  @media (max-width:500px) {
-     > .menu {
+  @media (max-width: 500px) {
+    > .menu {
       display: none;
     }
     > .logo {
