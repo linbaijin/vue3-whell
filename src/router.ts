@@ -6,7 +6,8 @@ import ButtonDemo from './components/ButtonDemo.vue'
 import DialogDemo from './components/DialogDemo.vue'
 import TabsDemo from './components/TabsDemo.vue'
 import DocDemo from './components/DocDemo.vue'
-
+import Intro from './components/Intro.vue'
+import GetStarted from './components/GetStarted.vue'
 const history = createWebHistory()
 const router = createRouter({
   history: history,
@@ -22,6 +23,14 @@ const router = createRouter({
         {
           path: '',
           component: DocDemo,
+        },
+        {
+          path: 'intro',
+          component: Intro,
+        },
+        {
+          path: 'get-started',
+          component: GetStarted,
         },
         {
           path: 'switch',
