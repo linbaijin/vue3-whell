@@ -44,10 +44,11 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 20;
   justify-content: center;
   align-items: center;
   background: #fff;
+  box-shadow: 0 2px 8px #f0f1f2;
   transition: all 250ms ease-in-out;
   &.top {
     background: transparent;

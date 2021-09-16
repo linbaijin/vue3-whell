@@ -71,6 +71,7 @@ export default {
 $radius: 4px;
 $border-color: #d9d9d9;
 .ls-dialog {
+  color: rgb(36, 36, 36);
   background: white;
   border-radius: $radius;
   box-shadow: 0 0 3px fade_out(black, 0.5);
@@ -83,14 +84,14 @@ $border-color: #d9d9d9;
     width: 100%;
     height: 100%;
     background: fade_out(black, 0.6);
-    z-index: 10;
+    z-index: 99;
   }
   &-wrapper {
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    z-index: 11;
+    z-index: 100;
   }
   > header {
     padding: 12px 16px;

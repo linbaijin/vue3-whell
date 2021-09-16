@@ -21,6 +21,11 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@types/node@^16.9.1":
+  version "16.9.1"
+  resolved "https://registry.nlark.com/@types/node/download/@types/node-16.9.1.tgz#0611b37db4246c937feef529ddcc018cf8e35708"
+  integrity sha1-BhGzfbQkbJN/7vUp3cwBjPjjVwg=
+
 "@vitejs/plugin-vue@^1.2.1":
   version "1.2.1"
   resolved "https://registry.npm.taobao.org/@vitejs/plugin-vue/download/@vitejs/plugin-vue-1.2.1.tgz?cache=0&sync_timestamp=1617152725801&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vitejs%2Fplugin-vue%2Fdownload%2F%40vitejs%2Fplugin-vue-1.2.1.tgz#6de49436fc346f829a56676066428e3f011522ac"
@@ -290,6 +295,11 @@ generic-names@^2.0.1:
   dependencies:
     loader-utils "^1.1.0"
 
+github-markdown-css@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/github-markdown-css/download/github-markdown-css-4.0.0.tgz#be9f4caf7a389228d4c368336260ffc909061f35"
+  integrity sha1-vp9Mr3o4kijUw2gzYmD/yQkGHzU=
+
 glob-parent@~5.1.0:
   version "5.1.2"
   resolved "https://registry.npm.taobao.org/glob-parent/download/glob-parent-5.1.2.tgz?cache=0&sync_timestamp=1615065997979&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fglob-parent%2Fdownload%2Fglob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -434,6 +444,11 @@ magic-string@^0.25.7:
   integrity sha1-P0l9b9NMZpxnmNy4IfLvMfVEUFE=
   dependencies:
     sourcemap-codec "^1.4.4"
+
+marked@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.nlark.com/marked/download/marked-3.0.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fmarked%2Fdownload%2Fmarked-3.0.4.tgz#b8a1539e5e05c6ea9e93f15c0bad1d54ce890406"
+  integrity sha1-uKFTnl4Fxuqek/FcC60dVM6JBAY=
 
 merge-source-map@^1.1.0:
   version "1.1.0"

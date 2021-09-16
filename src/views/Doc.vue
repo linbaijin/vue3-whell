@@ -9,6 +9,9 @@
             <router-link to="/doc/intro">介绍</router-link>
           </li>
           <li>
+            <router-link to="/doc/install">安装</router-link>
+          </li>
+          <li>
             <router-link to="/doc/get-started">开始</router-link>
           </li>
         </ol>
@@ -59,7 +62,7 @@ export default {
   }
   & > .content {
     position: relative;
-    margin-top: 60px;
+    margin-top: 90px;
     // padding-left: 156px;
     padding-left: 0;
     flex-grow: 1;
@@ -92,10 +95,11 @@ aside {
   padding: 16px 0;
   top: 0;
   left: -100%;
-  padding-top: 70px;
+  padding-top: 10px;
   height: 100%;
   transition: all 0.3s ease-in-out;
   border-right: 1px solid rgba(61, 61, 61, 0.2);
+  background-color: #fff;
   & > h2 {
     padding: 0 16px;
     margin-bottom: 4px;
