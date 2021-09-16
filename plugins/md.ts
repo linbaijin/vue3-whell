@@ -1,4 +1,3 @@
-import path from 'path'
 import marked from 'marked'
 
 const compileMdToJs = (str: string) => {
