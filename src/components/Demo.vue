@@ -33,7 +33,6 @@ export default {
     }
     const noRefComponent = shallowRef(props.component)
     return {
-      Prism,
       codeVisible,
       toggle,
       noRefComponent:noRefComponent.value
