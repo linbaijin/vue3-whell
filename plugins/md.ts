@@ -1,19 +1,31 @@
+// @ts-nocheck
+import path from 'path'
+import fs from 'fs'
 import marked from 'marked'
 
-const compileMdToJs = (str: string) => {
+const mdToJs = str => {
   const content = JSON.stringify(marked(str))
   return `export default ${content}`
 }
 
-//https://cn.vitejs.dev/guide/api-plugin.html#transforming-custom-file-types
 export function md() {
   return {
-    name: 'md-compiler',
-    transform(src, id) {
-      return {
-        code: id.endsWith('.md') ? compileMdToJs(src) : src,
-        map: null, // 如果可行将提供 source map
-      }
-    },
+    configureServer: [ // 用于开发
+      async ({ app }) => {
+        app.use(async (ctx, next) => { // koa
+          if (ctx.path.endsWith('.md')) {
+            ctx.type = 'js'
+            const filePath = path.join(process.cwd(), ctx.path)
+            ctx.body = mdToJs(fs.readFileSync(filePath).toString())
+          } else {
+            await next()
+          }
+        })
+      },
+    ],
+    transforms: [{  // 用于 rollup // 插件
+      test: context => context.path.endsWith('.md'),
+      transform: ({ code }) => mdToJs(code) 
+    }]
   }
 }

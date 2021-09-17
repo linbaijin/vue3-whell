@@ -53,6 +53,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/scss/variables.scss';
 .layout {
   display: flex;
   flex-direction: column;

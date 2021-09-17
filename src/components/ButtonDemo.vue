@@ -9,7 +9,7 @@
   <h1>示例二</h1>
   <div>
     <Button size="small">按钮</Button>
-    <Button >按钮</Button>
+    <Button>按钮</Button>
     <Button size="large">按钮</Button>
   </div>
   <h1>示例三</h1>
@@ -33,13 +33,20 @@
     <Button loading>按钮</Button>
     <Button>加载完毕</Button>
   </div>
+  <h1>示例六</h1>
+  <div>
+    <ButtonDemo />
+  </div>
 </template>
 
 <script lang="ts">
 import Button from '../lib/Button.vue'
+import ButtonDemo from '../demo/demo1.vue'
+console.log('ButtonDemo', ButtonDemo)
 export default {
   components: {
     Button,
+    ButtonDemo
   },
   setup() {
     const onClick = () => {
@@ -47,6 +54,7 @@ export default {
     }
     return {
       onClick,
+      ButtonDemo
     }
   },
 }

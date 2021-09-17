@@ -49,6 +49,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/scss/variables.scss';
 .ls-ui-home {
   background: $linear-gradient-bg;
   clip-path: ellipse(80% 60% at 50% 40%);
