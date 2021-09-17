@@ -15,10 +15,7 @@
 
 <script lang="ts">
 import Button from '../lib/Button.vue'
-import 'prismjs'
-import 'prismjs/themes/prism.css'
 import { ref, shallowRef } from 'vue'
-const Prism = (window as any).Prism
 export default {
   props: {
     component: {
