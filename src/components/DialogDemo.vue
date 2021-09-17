@@ -1,34 +1,27 @@
 <template>
-  <div>Dialog示例</div>
-  <h1>示例一</h1>
-  <Button @click="toggle" type="primary">toggle</Button>
-  <Button @click="toggle2" type="primary">toggle2</Button>
-  <h1>示例二</h1>
-  <Button @click="showDialog" type="primary">showDialog</Button>
-  <Dialog v-model:visible="x">
-    <template #content>
-      <div>dialog内容</div>
-    </template>
-  </Dialog>
-  <Dialog v-model:visible="y" :closeOnClickOverlay="false" :ok="f1" :cancel="f2">
-    <template #title>
-      <strong>加粗的标题</strong>
-    </template>
-    <template #content>
-      <div>dialog内容</div>
-    </template>
-  </Dialog>
+  <h1>Dialog 对话框</h1>
+  <Demo :component="DialogDemo1" />
+  <Demo :component="DialogDemo2" />
+  <Demo :component="DialogDemo3" />
 </template>
 
 <script lang="ts">
 import { ref } from 'vue'
 import Dialog from '../lib/Dialog.vue'
 import Button from '../lib/Button.vue'
-import {openDialog} from '../lib/openDialog'
+import { openDialog } from '../lib/openDialog'
+import DialogDemo1 from '../demo/Dialog/demo1.vue'
+import DialogDemo2 from '../demo/Dialog/demo2.vue'
+import DialogDemo3 from '../demo/Dialog/demo3.vue'
+import Demo from './Demo.vue'
 export default {
   components: {
     Dialog,
     Button,
+    Demo,
+    DialogDemo1,
+    DialogDemo2,
+    DialogDemo3,
   },
   setup() {
     const x = ref(false)
@@ -53,7 +46,7 @@ export default {
         },
         cancel() {
           console.log('cancel')
-        }
+        },
       })
     }
     return {
@@ -63,7 +56,10 @@ export default {
       toggle2,
       f1,
       f2,
-      showDialog
+      showDialog,
+      DialogDemo1,
+      DialogDemo2,
+      DialogDemo3,
     }
   },
 }
