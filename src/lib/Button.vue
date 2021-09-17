@@ -94,15 +94,18 @@ $radius: 4px;
     // }
   }
   &.ls-theme-link {
+    background-color: transparent;
     border-color: transparent;
     box-shadow: none;
     color: $blue;
+    text-decoration: underline;
     &:hover,
     &:focus {
       color: lighten($blue, 10%);
     }
   }
   &.ls-theme-text {
+    background-color: transparent;
     border-color: transparent;
     box-shadow: none;
     color: inherit;
