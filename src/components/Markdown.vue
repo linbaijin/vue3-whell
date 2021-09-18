@@ -14,10 +14,8 @@ export default {
   components: {},
   setup(props, content) {
     const mdContent = ref<string | null>(null)
-    import(
-      /* @vite-ignore */
-      props.path
-    ).then((result) => {
+    /* @vite-ignore */
+    import(props.path).then((result) => {
       mdContent.value = result.default
     })
     return {
