@@ -1,26 +1,18 @@
 <template>
-  <article class="markdown-body" v-html="mdContent"></article>
+  <article class="markdown-body" v-html="content"></article>
 </template>
 
 <script lang="ts">
 import { ref } from 'vue'
 export default {
   props: {
-    path: {
+    content: {
       type: String,
       required: true,
     },
   },
   components: {},
   setup(props, content) {
-    const mdContent = ref<string | null>(null)
-    /* @vite-ignore */
-    import(props.path).then((result) => {
-      mdContent.value = result.default
-    })
-    return {
-      mdContent,
-    }
   },
 }
 </script>
