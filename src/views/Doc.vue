@@ -64,6 +64,7 @@ export default {
   & > .content {
     position: relative;
     margin-top: 90px;
+    height: calc(100vh - 90px);
     // padding-left: 156px;
     padding-left: 0;
     flex-grow: 1;
@@ -83,6 +84,8 @@ export default {
     }
   }
   & > main {
+    max-height: 100%;
+    overflow: auto;
     flex-grow: 1;
     padding: 16px;
   }
