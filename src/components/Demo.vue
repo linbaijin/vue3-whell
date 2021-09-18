@@ -5,7 +5,7 @@
       <component :is="noRefComponent"></component>
     </div>
     <div class="demo-actions">
-      <Button @click="toggle">查看代码</Button>
+      <Button @click="toggle"> {{ codeVisible ? '收起' : '查看' }}代码 </Button>
     </div>
     <div class="demo-code" v-show="codeVisible">
       <pre class="language-html" v-html="Prism.highlight(component.__sourceCode, Prism.languages.html, 'html')"></pre>
@@ -36,8 +36,8 @@ export default {
     return {
       codeVisible,
       toggle,
-      noRefComponent:noRefComponent.value,
-      Prism
+      noRefComponent: noRefComponent.value,
+      Prism,
     }
   },
 }
