@@ -16,6 +16,7 @@
 <script lang="ts">
 import Button from '../lib/Button.vue'
 import { ref, shallowRef } from 'vue'
+const Prism = (window as any).Prism
 export default {
   props: {
     component: {
@@ -35,7 +36,8 @@ export default {
     return {
       codeVisible,
       toggle,
-      noRefComponent:noRefComponent.value
+      noRefComponent:noRefComponent.value,
+      Prism
     }
   },
 }
