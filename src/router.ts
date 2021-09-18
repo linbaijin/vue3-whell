@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from 'vue-router'
+import { createWebHashHistory, createRouter } from 'vue-router'
 import Home from './views/Home.vue'
 import Doc from './views/Doc.vue'
 import SwitchDemo from './components/SwitchDemo.vue'
@@ -11,7 +11,7 @@ import Markdown from './components/Markdown.vue'
 const renderMarkdown = (fileName: string) => {
   return h(Markdown, {path: `../markdown/${fileName}.md`, key: fileName})
 }
-const history = createWebHistory()
+const history = createWebHashHistory()
 const router = createRouter({
   history: history,
   routes: [

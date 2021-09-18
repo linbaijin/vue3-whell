@@ -8,4 +8,4 @@ Ls UI 是一款基于 Vue 3 和 TypeScript 的 UI 组件库。
 源码放在了[https://github.com/linbaijin/vue3-whell](https://github.com/linbaijin/vue3-whell)    历史提交信息非常规范，你可以按提交的顺序逐个查看；你也可以直接查看每个组件的源代码和示例，运行方法见
 README.md。
 
-下一节：[安装](/doc/install)
+下一节：[安装](#/doc/install)
