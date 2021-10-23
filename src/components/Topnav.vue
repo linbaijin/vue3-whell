@@ -1,16 +1,22 @@
 <template>
   <div class="topnav" :class="{ top: scrollTop < 10 }">
     <div class="logo">
-      <svg class="icon">
-        <use xlink:href="#icon-UFOSVG"></use>
-      </svg>
+      <router-link to="/">
+        <svg class="icon">
+          <use xlink:href="#icon-UFOSVG"></use>
+        </svg>
+      </router-link>
     </div>
     <ul class="menu">
       <li>
         <router-link to="/doc">文档</router-link>
       </li>
     </ul>
-    <span class="toggleAside" @click="toggleMenuVisible"></span>
+    <span class="toggleAside" @click="toggleMenuVisible">
+      <svg class="icon">
+          <use xlink:href="#icon-toggle"></use>
+        </svg>
+    </span>
   </div>
 </template>
 
@@ -56,7 +62,7 @@ export default {
   > .logo {
     max-width: 6em;
     margin-right: auto;
-    & > .icon {
+    & .icon {
       width: 36px;
       height: 36px;
     }
@@ -73,11 +79,15 @@ export default {
     display: none;
     width: 24px;
     height: 24px;
-    background-color: red;
+    color: #222222;
     position: absolute;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
+    & .icon {
+      width: 32px;
+      height: 32px;
+    }
   }
   @media (max-width: 500px) {
     > .menu {

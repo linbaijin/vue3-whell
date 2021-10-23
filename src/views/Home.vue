@@ -7,7 +7,7 @@
         <h1>Asome Vue3 UI Framework</h1>
         <p class="actions">
           <a href="">Github</a>
-          <a href="/doc">开始</a>
+          <a href="/#/doc">开始</a>
         </p>
       </div>
     </div>
