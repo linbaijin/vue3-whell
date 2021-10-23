@@ -29,6 +29,9 @@
           <li>
             <router-link to="/doc/tabs"> tabs组件 </router-link>
           </li>
+          <li>
+            <router-link to="/doc/datepicker"> datepicker组件 </router-link>
+          </li>
         </ol>
       </aside>
       <main>

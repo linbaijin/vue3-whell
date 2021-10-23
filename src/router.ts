@@ -5,6 +5,7 @@ import SwitchDemo from './components/SwitchDemo.vue'
 import ButtonDemo from './components/ButtonDemo.vue'
 import DialogDemo from './components/DialogDemo.vue'
 import TabsDemo from './components/TabsDemo.vue'
+import DatePickerDemo from './components/DatePickerDemo.vue'
 import DocDemo from './components/DocDemo.vue'
 import { h } from 'vue'
 import Markdown from './components/Markdown.vue'
@@ -54,6 +55,10 @@ const router = createRouter({
         {
           path: 'tabs',
           component: TabsDemo,
+        },
+        {
+          path: 'datepicker',
+          component: DatePickerDemo,
         },
       ],
     },
