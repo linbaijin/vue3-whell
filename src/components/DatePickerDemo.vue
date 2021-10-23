@@ -1,6 +1,6 @@
 <template>
   <div class="demo-page">
-    <h1>Button 按钮</h1>
+    <h1>DatePicker 日期选择器</h1>
     <Demo :component="DatePickerDemo1" />
   </div>
 </template>
