@@ -7,8 +7,8 @@ export const cloneDate = (date: Date | string) => {
   }
 }
 
-export const getYearMonthDay = (date:Date) => {
-    return [date.getFullYear(), date.getMonth(), date.getDate()]
+export const getYearMonthDay = (date: Date) => {
+  return [date.getFullYear(), date.getMonth(), date.getDate()]
 }
 
 export const getCurrentMonthLastDay = (year: number, month: number) => {
