@@ -3,36 +3,44 @@
     <div class="ls-date-picker__input" @click="onClickInput">
       <input v-model="displayValue" type="text" />
     </div>
-    <div class="ls-date-picker__popover" v-show="popoverVisible">popover</div>
+    <div class="ls-date-picker__popover" v-show="popoverVisible">
+      <component
+        :is="PickerDays"
+        v-model:tempdate="tempDate"
+        :value="modelValue"
+        :formatDate="formatDate"
+        @clickDay="onClickDay"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { cloneDate, getYearMonthDay } from './tools'
+import PickerDays from './PickerDays.vue'
 export default {
   name: 'DatePicker',
   props: {
-    value: {
+    modelValue: {
       type: Date,
       default: () => new Date(),
     },
   },
-  components: {},
+  components: {
+    PickerDays,
+  },
   setup(props, context) {
-    const datePicker = ref<HTMLDivElement>(null)
+    const datePicker = ref<HTMLDivElement>()
     const popoverVisible = ref(false)
-
-    const tempDate = computed(() => {
-      return cloneDate(props.value)
-    })
+    const tempDate = ref(cloneDate(props.modelValue))
     const formatDate = computed(() => {
-        const [year, month, day] = getYearMonthDay(tempDate.value)
-        return {
-          year,
-          month: month + 1,
-          day,
-        }
+      const [year, month, day] = getYearMonthDay(tempDate.value)
+      return {
+        year,
+        month: month + 1,
+        day,
+      }
     })
     const displayValue = computed<String>({
       get() {
@@ -40,14 +48,14 @@ export default {
         return `${year}-${month + 1}-${day}`
       },
       set(val) {
-          console.log('set!', val)
-          const reg = /(\d{4})-(\d{1,2})-(\d{1,2})/
-          const matched = val.match(reg)
-          console.log(matched)
-          if(matched) {
-            const [, year, month, day] = matched
-            context.emit('update:value', new Date(`${year}-${month + 1}-${day}`))
-          }
+        console.log('set!', val)
+        const reg = /(\d{4})-(\d{1,2})-(\d{1,2})/
+        const matched = val.match(reg)
+        console.log(matched)
+        if (matched) {
+          const [, year, month, day] = matched
+          context.emit('update:value', new Date(`${year}-${month + 1}-${day}`))
+        }
       },
     })
 
@@ -65,13 +73,19 @@ export default {
       console.log(datePicker.value)
       document.body.addEventListener('click', onClickBody)
     })
-    onBeforeUnmount(() => {})
+    // onBeforeUnmount(() => {})
+    const onClickDay = (date: Date) => {
+      context.emit('update:modelValue', date)
+    }
     return {
       datePicker,
       popoverVisible,
       onClickInput,
       formatDate,
-      displayValue
+      displayValue,
+      onClickDay,
+      tempDate,
+      PickerDays,
     }
   },
 }
@@ -79,6 +93,7 @@ export default {
 
 <style lang="scss">
 .ls-date-picker {
+  position: relative;
   &__input {
     padding: 10px 12px;
     box-shadow: 0 1px 3px rgb(50 50 93 / 15%), 0 1px 0 rgb(0 0 0 / 2%);
@@ -87,6 +102,17 @@ export default {
       border: none;
       outline: none;
     }
+  }
+  &__popover {
+    color: #65708c;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 10px 50px 0 rgb(0 0 0 / 20%);
+    z-index: 10;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 36px;
   }
 }
 </style>

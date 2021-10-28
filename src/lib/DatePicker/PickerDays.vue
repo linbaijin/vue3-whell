@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { computed } from '@vue/runtime-core'
+import { computed } from 'vue'
 import { cloneDate, getYearMonthDay, getPreMonthLastDay, getCurrentMonthLastDay } from './tools'
 import { toMatrix } from '../../helper/utils'
 interface DaysArrItem {
@@ -45,7 +45,7 @@ export default {
       default: () => new Date(),
       required: true,
     },
-    tempDate: {
+    tempdate: {
       type: Date,
       default: () => new Date(),
       required: true,
@@ -57,23 +57,20 @@ export default {
     },
   },
   components: {},
-  watch:{
-    tempDate() {
-      console.log('tempDate发生了变化', this.tempDate)
-    }
-  },
   setup(props, context) {
+    console.log('props!', { ...props })
     const changeMonth = (value: number) => {
-      if (props.tempDate instanceof Date) {
-        const [, month] = getYearMonthDay(props.tempDate)
-        const timestamp = cloneDate(props.tempDate).setMonth(month + value)
-        context.emit('update:tempDate', new Date(timestamp))
+      if (props.tempdate instanceof Date) {
+        console.log('changeMonth!', value)
+        const [, month] = getYearMonthDay(props.tempdate)
+        const timestamp = cloneDate(props.tempdate).setMonth(month + value)
+        context.emit('update:tempdate', new Date(timestamp))
       }
     }
     const getPrevMonthDays = (prevLastDay: number, startWeek: number) => {
       const prevMonthDays: DaysArrItem[] = []
-      if (props.tempDate instanceof Date) {
-        const [year, month] = getYearMonthDay(props.tempDate)
+      if (props.tempdate instanceof Date) {
+        const [year, month] = getYearMonthDay(props.tempdate)
         for (let i = prevLastDay - startWeek + 1; i <= prevLastDay; i++) {
           prevMonthDays.push({
             date: new Date(year, month - 1, i),
@@ -81,15 +78,15 @@ export default {
           })
         }
       } else {
-        throw new Error('props.tempDate is not Date type')
+        throw new Error('props.tempdate is not Date type')
       }
       return prevMonthDays
     }
     const getCurrentDays = (curLastDay: number) => {
       console.log('getCurrentDays', curLastDay)
       const currMonthDays: DaysArrItem[] = []
-      if (props.tempDate instanceof Date) {
-        const [year, month] = getYearMonthDay(props.tempDate)
+      if (props.tempdate instanceof Date) {
+        const [year, month] = getYearMonthDay(props.tempdate)
         for (let i = 1; i <= curLastDay; i++) {
           currMonthDays.push({
             date: new Date(year, month, i),
@@ -97,14 +94,14 @@ export default {
           })
         }
       } else {
-        throw new Error('props.tempDate is not Date type')
+        throw new Error('props.tempdate is not Date type')
       }
       return currMonthDays
     }
     const getNextMonthDays = (curLastDay: number, startWeek: number) => {
       const nextMonthDays: DaysArrItem[] = []
-      if (props.tempDate instanceof Date) {
-        const [year, month] = getYearMonthDay(props.tempDate)
+      if (props.tempdate instanceof Date) {
+        const [year, month] = getYearMonthDay(props.tempdate)
         for (let i = 1; i <= 42 - curLastDay - startWeek; i++) {
           nextMonthDays.push({
             date: new Date(year, month + 1, i),
@@ -112,15 +109,14 @@ export default {
           })
         }
       } else {
-        throw new Error('props.tempDate is not Date type')
+        throw new Error('props.tempdate is not Date type')
       }
       return nextMonthDays
     }
     const weeks = ['日', '一', '二', '三', '四', '五', '六']
     const days = computed(() => {
-      console.log('!!!')
-      if (props.tempDate instanceof Date) {
-        const [year, month] = getYearMonthDay(props.tempDate)
+      if (props.tempdate instanceof Date) {
+        const [year, month] = getYearMonthDay(props.tempdate)
         let startWeek = new Date(year, month, 1).getDay()
         if (startWeek === 0) {
           startWeek = 7
@@ -132,8 +128,9 @@ export default {
           ...getCurrentDays(curLastDay),
           ...getNextMonthDays(curLastDay, startWeek),
         ]
-        console.log('day!', day)
         return toMatrix(day, 7)
+      } else {
+        throw new Error('props.tempdate is not Date type')
       }
     })
     const getDate = (cell: DaysArrItem) => {
