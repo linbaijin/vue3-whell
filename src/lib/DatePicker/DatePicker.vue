@@ -44,8 +44,10 @@ export default {
     })
     const displayValue = computed<String>({
       get() {
-        const [year, month, day] = getYearMonthDay(tempDate.value)
-        return `${year}-${month + 1}-${day}`
+        if (props.modelValue instanceof Date) {
+          const [year, month, day] = getYearMonthDay(props.modelValue)
+          return `${year}-${month + 1}-${day}`
+        }
       },
       set(val) {
         console.log('set!', val)
@@ -54,7 +56,7 @@ export default {
         console.log(matched)
         if (matched) {
           const [, year, month, day] = matched
-          context.emit('update:value', new Date(`${year}-${month + 1}-${day}`))
+          context.emit('update:modelValue', new Date(`${year}-${month + 1}-0${day}`))
         }
       },
     })
@@ -76,6 +78,7 @@ export default {
     // onBeforeUnmount(() => {})
     const onClickDay = (date: Date) => {
       context.emit('update:modelValue', date)
+      tempDate.value = date
     }
     return {
       datePicker,
