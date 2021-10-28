@@ -141,11 +141,17 @@ export default {
       const [y2, m2, d2] = getYearMonthDay(date2)
       return y1 === y2 && m1 === m2 && d1 === d2
     }
+    const isToday = (date) => {
+      const [y1, m1, d1] = getYearMonthDay(date);
+      const [y2, m2, d2] = getYearMonthDay(new Date());
+      return y1 === y2 && m1 === m2 && d1 === d2;
+    }
     const dayClasses = (cell: DaysArrItem) => {
       return {
         prev: cell.status === 'prev',
         next: cell.status === 'next',
         active: props.value instanceof Date && isSameDay(cell.date, props.value),
+        today: isToday(cell.date)
       }
     }
     const onClickDay = ({ date }: { date: Date }) => {
@@ -171,6 +177,7 @@ export default {
   height: $date-picker-cell-size;
   line-height: $date-picker-cell-size;
   text-align: center;
+  user-select: none;
 }
 .ls-date-picker {
   &__popover-header {
@@ -211,9 +218,12 @@ export default {
         color: #adb5bd;
         font-weight: 300;
       }
+      &.today {
+        color: $date-picker-active-color;
+      }
       &.active {
         color: #fff;
-        background-color: #11cdef;
+        background-color: $date-picker-active-color;
       }
     }
   }
