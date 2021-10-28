@@ -1,11 +1,12 @@
 <demo>基础用法</demo>
 <template>
   <div>
-    <DatePicker />
+    <DatePicker v-model="time" />
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import DatePicker from '../../lib/DatePicker/DatePicker.vue'
 export default {
   props: {},
@@ -13,7 +14,10 @@ export default {
     DatePicker,
   },
   setup(props, content) {
-    return {}
+    const time = ref(new Date())
+    return {
+      time
+    }
   },
 }
 </script>

@@ -12,6 +12,7 @@ import Markdown from './components/Markdown.vue'
 import Intro from './markdown/Intro.md'
 import Install from './markdown/Install.md'
 import GetStarted from './markdown/GetStarted.md'
+import Test from './views/test.vue'
 const renderMarkdown = (content, key) => {
   return h(Markdown, { content, key })
 }
@@ -22,6 +23,10 @@ const router = createRouter({
     {
       path: '/',
       component: Home,
+    },
+    {
+      path: '/test',
+      component: Test
     },
     {
       path: '/doc',
