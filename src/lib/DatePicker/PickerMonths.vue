@@ -2,7 +2,7 @@
   <div class="ls-months-picker">
     <div class="ls-date-picker__popover-header">
       <span class="ls-date-picker__popover-header-pre" @click="changeYear(-1)">‹</span>
-      <span class="ls-date-picker__popover-header-info">{{ formatDate.year }}年</span>
+      <span class="ls-date-picker__popover-header-info" @click="changeMode">{{ formatDate.year }}年</span>
       <span class="ls-date-picker__popover-header-next" @click="changeYear(1)">›</span>
     </div>
     <div class="ls-date-picker__popover-content">
@@ -74,7 +74,7 @@ export default {
       }
     }
     const onClickMonth = (i, j) => {
-        console.log('!', props.formatDate)
+      console.log('!', props.formatDate)
       const month = j + i * 4
       const { year, day } = props.formatDate
       context.emit('update:tempdate', new Date(year, month, day))
@@ -88,11 +88,15 @@ export default {
         )
       )
     )
+    const changeMode = () => {
+      context.emit('modeChange', 'year')
+    }
     return {
       months,
       changeYear,
       monthClasses,
       onClickMonth,
+      changeMode,
     }
   },
 }
