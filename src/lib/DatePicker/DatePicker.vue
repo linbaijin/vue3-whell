@@ -4,13 +4,16 @@
       <input v-model="displayValue" type="text" />
     </div>
     <div class="ls-date-picker__popover" v-show="popoverVisible">
-      <component
-        :is="PickerDays"
-        v-model:tempdate="tempDate"
-        :value="modelValue"
-        :formatDate="formatDate"
-        @clickDay="onClickDay"
-      />
+      <keep-alive>
+        <component
+          :is="currentComponent"
+          v-model:tempdate="tempDate"
+          :value="modelValue"
+          :formatDate="formatDate"
+          @clickCell="onClickDay"
+          @modeChange="onModeChange"
+        />
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -19,6 +22,8 @@
 import { computed, onMounted, ref } from 'vue'
 import { cloneDate, getYearMonthDay } from './tools'
 import PickerDays from './PickerDays.vue'
+import PickerMonths from './PickerMonths.vue'
+type PickerModel = 'day' | 'month' | 'year'
 export default {
   name: 'DatePicker',
   props: {
@@ -29,8 +34,17 @@ export default {
   },
   components: {
     PickerDays,
+    PickerMonths,
   },
   setup(props, context) {
+    const pickerMode = ref<PickerModel>('day')
+    const currentComponent = computed(() => {
+      const componentMap = {
+        day: PickerDays,
+        month: PickerMonths,
+      }
+      return componentMap[pickerMode.value]
+    })
     const datePicker = ref<HTMLDivElement>()
     const popoverVisible = ref(false)
     const tempDate = ref(cloneDate(props.modelValue))
@@ -66,6 +80,7 @@ export default {
       if (datePicker.value.contains(e.target as Node)) {
         return
       }
+      console.log(datePicker.value.contains(e.target as Node))
       popoverVisible.value = false
     }
     const onClickInput = () => {
@@ -80,6 +95,11 @@ export default {
       context.emit('update:modelValue', date)
       tempDate.value = date
     }
+    const onModeChange = (mode: PickerModel) => {
+      setTimeout(() => {
+        pickerMode.value = mode
+      })
+    }
     return {
       datePicker,
       popoverVisible,
@@ -88,7 +108,8 @@ export default {
       displayValue,
       onClickDay,
       tempDate,
-      PickerDays,
+      currentComponent,
+      onModeChange,
     }
   },
 }
