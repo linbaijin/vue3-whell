@@ -2,7 +2,7 @@
   <div class="ls-days-picker">
     <div class="ls-date-picker__popover-header">
       <span class="ls-date-picker__popover-header-pre" @click="changeMonth(-1)">‹</span>
-      <span class="ls-date-picker__popover-header-info"
+      <span class="ls-date-picker__popover-header-info" @click="changeMode"
         >{{ formatDate.year }}年{{ formatDate.month }}月{{ formatDate.day }}日</span
       >
       <span class="ls-date-picker__popover-header-next" @click="changeMonth(1)">›</span>
@@ -155,10 +155,13 @@ export default {
       }
     }
     const onClickDay = ({ date }: { date: Date }) => {
-      context.emit('clickDay', date)
+      context.emit('clickCell', date)
     }
     const onClickInfo = () => {
       context.emit('modeChange', 'picker-month')
+    }
+    const changeMode = () => {
+      context.emit('modeChange', 'month')
     }
     console.log('days', days)
     return {
@@ -168,7 +171,8 @@ export default {
       dayClasses,
       onClickDay,
       changeMonth,
-      onClickInfo
+      onClickInfo,
+      changeMode,
     }
   },
 }
@@ -176,10 +180,10 @@ export default {
 
 <style lang="scss">
 @import '../../assets/scss/variables.scss';
-@mixin datepickercell() {
-  width: $date-picker-cell-size;
-  height: $date-picker-cell-size;
-  line-height: $date-picker-cell-size;
+@mixin datepickercell($size: 36px) {
+  width: $size;
+  height: $size;
+  line-height: $size;
   text-align: center;
   user-select: none;
 }
@@ -191,6 +195,7 @@ export default {
       text-align: center;
       line-height: $date-picker-cell-size;
       border-radius: 6px;
+      cursor: pointer;
       &:hover {
         background-color: #eee;
       }
