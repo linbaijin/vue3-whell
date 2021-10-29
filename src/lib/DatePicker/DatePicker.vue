@@ -23,6 +23,7 @@ import { computed, onMounted, ref } from 'vue'
 import { cloneDate, getYearMonthDay } from './tools'
 import PickerDays from './PickerDays.vue'
 import PickerMonths from './PickerMonths.vue'
+import PickerYears from './PickerYears.vue'
 type PickerModel = 'day' | 'month' | 'year'
 export default {
   name: 'DatePicker',
@@ -32,16 +33,13 @@ export default {
       default: () => new Date(),
     },
   },
-  components: {
-    PickerDays,
-    PickerMonths,
-  },
   setup(props, context) {
     const pickerMode = ref<PickerModel>('day')
     const currentComponent = computed(() => {
       const componentMap = {
         day: PickerDays,
         month: PickerMonths,
+        year: PickerYears
       }
       return componentMap[pickerMode.value]
     })
@@ -93,6 +91,7 @@ export default {
     const onClickDay = (date: Date) => {
       context.emit('update:modelValue', date)
       tempDate.value = date
+      popoverVisible.value = false
     }
     const onModeChange = (mode: PickerModel) => {
       setTimeout(() => {
