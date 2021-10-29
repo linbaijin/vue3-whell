@@ -142,20 +142,23 @@ export default {
       return y1 === y2 && m1 === m2 && d1 === d2
     }
     const isToday = (date) => {
-      const [y1, m1, d1] = getYearMonthDay(date);
-      const [y2, m2, d2] = getYearMonthDay(new Date());
-      return y1 === y2 && m1 === m2 && d1 === d2;
+      const [y1, m1, d1] = getYearMonthDay(date)
+      const [y2, m2, d2] = getYearMonthDay(new Date())
+      return y1 === y2 && m1 === m2 && d1 === d2
     }
     const dayClasses = (cell: DaysArrItem) => {
       return {
         prev: cell.status === 'prev',
         next: cell.status === 'next',
         active: props.value instanceof Date && isSameDay(cell.date, props.value),
-        today: isToday(cell.date)
+        today: isToday(cell.date),
       }
     }
     const onClickDay = ({ date }: { date: Date }) => {
       context.emit('clickDay', date)
+    }
+    const onClickInfo = () => {
+      context.emit('modeChange', 'picker-month')
     }
     console.log('days', days)
     return {
@@ -165,6 +168,7 @@ export default {
       dayClasses,
       onClickDay,
       changeMonth,
+      onClickInfo
     }
   },
 }
@@ -186,11 +190,19 @@ export default {
       flex: 1;
       text-align: center;
       line-height: $date-picker-cell-size;
+      border-radius: 6px;
+      &:hover {
+        background-color: #eee;
+      }
     }
     &-pre,
     &-next {
       cursor: pointer;
+      border-radius: 6px;
       @include datepickercell();
+      &:hover {
+        background-color: #eee;
+      }
     }
   }
   // &__popover-content {
