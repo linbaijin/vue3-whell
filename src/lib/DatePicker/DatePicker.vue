@@ -80,7 +80,6 @@ export default {
       if (datePicker.value.contains(e.target as Node)) {
         return
       }
-      console.log(datePicker.value.contains(e.target as Node))
       popoverVisible.value = false
     }
     const onClickInput = () => {

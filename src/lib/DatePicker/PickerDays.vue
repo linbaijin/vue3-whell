@@ -58,10 +58,8 @@ export default {
   },
   components: {},
   setup(props, context) {
-    console.log('props!', { ...props })
     const changeMonth = (value: number) => {
       if (props.tempdate instanceof Date) {
-        console.log('changeMonth!', value)
         const [, month] = getYearMonthDay(props.tempdate)
         const timestamp = cloneDate(props.tempdate).setMonth(month + value)
         context.emit('update:tempdate', new Date(timestamp))
@@ -83,7 +81,6 @@ export default {
       return prevMonthDays
     }
     const getCurrentDays = (curLastDay: number) => {
-      console.log('getCurrentDays', curLastDay)
       const currMonthDays: DaysArrItem[] = []
       if (props.tempdate instanceof Date) {
         const [year, month] = getYearMonthDay(props.tempdate)
@@ -163,7 +160,6 @@ export default {
     const changeMode = () => {
       context.emit('modeChange', 'month')
     }
-    console.log('days', days)
     return {
       weeks,
       days,
